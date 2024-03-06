@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { BaseUrl } from "../Auth/BaseUrl";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
@@ -13,7 +14,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/v1/user/logout",
+        `${BaseUrl}/api/v1/user/logout`,
         {
           withCredentials: true,
         }
@@ -30,7 +31,10 @@ const Navbar = () => {
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
       <div className="container">
         <div className="GigBridge">
-          <h4 style={{color:"#ffffff",padding:"20px"}}>GigBridge</h4>
+
+          <Link to={"/"} style={{textDecoration:"none",style:"none"}}>
+            <h4 style={{ color: "#ffffff", padding: "20px"}}>GigBridge</h4>
+          </Link>
         </div>
         <ul className={!show ? "menu" : "show-menu menu"}>
           <li>

@@ -5,6 +5,7 @@ import { FaCheck } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { Context } from "../../main";
 import { useNavigate } from "react-router-dom";
+import { BaseUrl } from "../Auth/BaseUrl";
 
 const MyJobs = () => {
   const [myJobs, setMyJobs] = useState([]);
@@ -17,7 +18,7 @@ const MyJobs = () => {
     const fetchJobs = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/api/v1/job/getmyjobs",
+          `${BaseUrl}/api/v1/job/getmyjobs`,
           { withCredentials: true }
         );
         setMyJobs(data.myJobs);
@@ -47,7 +48,7 @@ const MyJobs = () => {
   const handleUpdateJob = async (jobId) => {
     const updatedJob = myJobs.find((job) => job._id === jobId);
     await axios
-      .put(`http://localhost:4000/api/v1/job/update/${jobId}`, updatedJob, {
+      .put(`${BaseUrl}/api/v1/job/update/${jobId}`, updatedJob, {
         withCredentials: true,
       })
       .then((res) => {
@@ -62,7 +63,7 @@ const MyJobs = () => {
   //Function For Deleting Job
   const handleDeleteJob = async (jobId) => {
     await axios
-      .delete(`http://localhost:4000/api/v1/job/delete/${jobId}`, {
+      .delete(`${BaseUrl}/api/v1/job/delete/${jobId}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -162,36 +163,30 @@ const MyJobs = () => {
                               editingMode !== element._id ? true : false
                             }
                           >
-                            <option value="Graphics & Design">
-                              Graphics & Design
-                            </option>
-                            <option value="Mobile App Development">
-                              Mobile App Development
-                            </option>
-                            <option value="Frontend Web Development">
-                              Frontend Web Development
-                            </option>
-                            <option value="MERN Stack Development">
-                              MERN STACK Development
-                            </option>
-                            <option value="Account & Finance">
-                              Account & Finance
-                            </option>
-                            <option value="Artificial Intelligence">
-                              Artificial Intelligence
-                            </option>
-                            <option value="Video Animation">
-                              Video Animation
-                            </option>
-                            <option value="MEAN Stack Development">
-                              MEAN STACK Development
-                            </option>
-                            <option value="MEVN Stack Development">
-                              MEVN STACK Development
-                            </option>
-                            <option value="Data Entry Operator">
-                              Data Entry Operator
-                            </option>
+                            <option value="Housekeeper">Housekeeper</option>
+                            <option value="Babysitter/Nanny">Babysitter/Nanny</option>
+
+                            <option value="Freelance Writer">Freelance Writer</option>
+                            <option value="Graphic Designer">Graphic Designer</option>
+
+                            <option value="Construction Worker">Construction Worker</option>
+                            <option value="Landscaping Laborer">Landscaping Laborer</option>
+
+                            <option value="Waiter/Waitress">Waiter/Waitress</option>
+                            <option value="Barista">Barista</option>
+
+                            <option value="Street Vendor">Street Vendor</option>
+                            <option value="Handicrafts Seller">Handicrafts Seller</option>
+
+                            <option value="Illustrator">Illustrator</option>
+                            <option value="Musician">Musician</option>
+
+                            <option value="Holiday Retail Worker">Holiday Retail Worker</option>
+                            <option value="Harvest Worker">Harvest Worker</option>
+
+                            <option value="Electrician">Electrician</option>
+                            <option value="Plumber">Plumber</option>
+
                           </select>
                         </div>
                         <div>
