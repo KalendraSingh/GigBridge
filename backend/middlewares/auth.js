@@ -7,7 +7,7 @@ export const isAuthenticated = catchAsyncErrors(async (req, res, next) => {
       
 const token = req.headers.authorization;
   //const { token } = req.cookies;
-  console.log("JWT token",token)
+  
   if (!token) {
     return next(new ErrorHandler("User Not Authorized", 401));
   }

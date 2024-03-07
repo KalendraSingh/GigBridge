@@ -11,22 +11,44 @@ const Navbar = () => {
   const { isAuthorized, setIsAuthorized, user } = useContext(Context);
   const navigateTo = useNavigate();
 
+  // const handleLogout = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `${BaseUrl}/api/v1/user/logout`,
+
+  //     );
+  //     toast.success(response.data.message);
+  //     setIsAuthorized(false);
+  //     localStorage.removeItem("token")
+  //     navigateTo("/login");
+  //   } catch (error) {
+  //     toast.error(error.response.data.message), setIsAuthorized(true);
+  //   }
+  // };
   const handleLogout = async () => {
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${BaseUrl}/api/v1/user/logout`
-        // {
-        //   withCredentials: true,
-        // }
+        `${BaseUrl}/api/v1/user/logout`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       toast.success(response.data.message);
-      setIsAuthorized(false);
-      localStorage.removeItem("token")
-      navigateTo("/login");
+      setIsAuthorized(false); // Update the authentication state
+      localStorage.removeItem("token"); // Remove token from local storage
+      navigateTo("/login"); // Redirect to the login page
     } catch (error) {
-      toast.error(error.response.data.message), setIsAuthorized(true);
+      // Handle error if logout fails
+      toast.error(error.response.data.message);
+      setIsAuthorized(true); // Still update the authentication state even if logout fails
+      // Still remove token from local storage
+  // Redirect to the login page
     }
   };
+  
 
   return (
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
