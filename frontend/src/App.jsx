@@ -18,7 +18,9 @@ import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
 import { BaseUrl } from "./components/Auth/BaseUrl";
 
+
 const App = () => {
+  const token = localStorage.getItem("token")
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
   useEffect(() => {
     const fetchUser = async () => {
@@ -26,10 +28,14 @@ const App = () => {
         const response = await axios.get(
           `${BaseUrl}/api/v1/user/getuser`,
           {
-            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the token in the request headers
+            },
           }
         );
+
         setUser(response.data.user);
+        console.log("set user",response.data.user)
         setIsAuthorized(true);
       } catch (error) {
         setIsAuthorized(false);

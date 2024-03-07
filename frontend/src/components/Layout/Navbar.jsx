@@ -14,13 +14,14 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        `${BaseUrl}/api/v1/user/logout`,
-        {
-          withCredentials: true,
-        }
+        `${BaseUrl}/api/v1/user/logout`
+        // {
+        //   withCredentials: true,
+        // }
       );
       toast.success(response.data.message);
       setIsAuthorized(false);
+      localStorage.removeItem("token")
       navigateTo("/login");
     } catch (error) {
       toast.error(error.response.data.message), setIsAuthorized(true);
