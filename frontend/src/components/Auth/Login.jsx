@@ -62,6 +62,7 @@ const Login = () => {
                   <option value="Job Seeker">Job Seeker</option>
                 </select>
                 <FaRegUser />
+          
               </div>
             </div>
             <div className="inputTag">
