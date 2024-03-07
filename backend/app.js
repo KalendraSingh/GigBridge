@@ -22,7 +22,7 @@ config({ path: "./config/config.env" });
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true,
-  allowedHeaders: 'X-Requested-With, Content-Type, Authorization',
+  allowedHeaders: ['X-Requested-With, Content-Type, Authorization'],
   methods: 'GET, POST, PATCH, PUT, POST, DELETE, OPTIONS'
 }))
 
