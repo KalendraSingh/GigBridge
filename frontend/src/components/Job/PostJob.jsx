@@ -17,6 +17,7 @@ const PostJob = () => {
   const [salaryType, setSalaryType] = useState("default");
 
   const { isAuthorized, user } = useContext(Context);
+  const token = localStorage.getItem("token");
 
   const handleJobPost = async (e) => {
     e.preventDefault();
@@ -54,8 +55,8 @@ const PostJob = () => {
             salaryTo,
           },
         {
-          withCredentials: true,
           headers: {
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }

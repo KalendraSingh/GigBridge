@@ -12,9 +12,12 @@ const JobDetails = () => {
   const { isAuthorized, user } = useContext(Context);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     axios
       .get(`${BaseUrl}/api/v1/job/${id}`, {
-        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then((res) => {
         setJob(res.data.job);

@@ -11,6 +11,7 @@ const MyJobs = () => {
   const [myJobs, setMyJobs] = useState([]);
   const [editingMode, setEditingMode] = useState(null);
   const { isAuthorized, user } = useContext(Context);
+  const token = localStorage.getItem("token");
 
   const navigateTo = useNavigate();
   //Fetching all jobs
@@ -19,7 +20,9 @@ const MyJobs = () => {
       try {
         const { data } = await axios.get(
           `${BaseUrl}/api/v1/job/getmyjobs`,
-          { withCredentials: true }
+          {  headers: {
+            Authorization: `Bearer ${token}`,
+          } }
         );
         setMyJobs(data.myJobs);
       } catch (error) {
@@ -49,7 +52,9 @@ const MyJobs = () => {
     const updatedJob = myJobs.find((job) => job._id === jobId);
     await axios
       .put(`${BaseUrl}/api/v1/job/update/${jobId}`, updatedJob, {
-        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then((res) => {
         toast.success(res.data.message);
@@ -64,7 +69,9 @@ const MyJobs = () => {
   const handleDeleteJob = async (jobId) => {
     await axios
       .delete(`${BaseUrl}/api/v1/job/delete/${jobId}`, {
-        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
       .then((res) => {
         toast.success(res.data.message);

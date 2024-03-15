@@ -35,14 +35,16 @@ const Application = () => {
     formData.append("jobId", id);
 
     try {
+      const token = localStorage.getItem("token");
       const { data } = await axios.post(
         `${BaseUrl}/api/v1/application/post`,
         formData,
         {
-          withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
-          },
+            Authorization: `Bearer ${token}`,
+          }
+        ,
         }
       );
       setName("");

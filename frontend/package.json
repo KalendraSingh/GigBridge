@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy": "https://gigbridge-r97v.onrender.com",
+
   "private": true,
   "version": "0.0.0",
   "type": "module",
